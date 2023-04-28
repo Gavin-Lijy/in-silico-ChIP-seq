@@ -1,0 +1,37 @@
+Package: silicoChIP
+Title: In silico ChIP-seq of multiomic scRNA+scATAC
+Version: 0.0.0.9000
+Maintainer: Ricard Argelaguet <ricard.argelaguet@gmail.com>
+Authors@R: c(person("Ricard", "Argelaguet", role = c("aut", "cre"),
+                     email = "ricard.argelaguet@gmail.com",
+                     comment = c(ORCID = "http://orcid.org/0000-0003-3199-3722")),
+              person("Bart", "Theeuwes", role = "aut",
+                     email = "barttheeuwes97@gmail.com",
+                     comment = c(ORCID = "http://orcid.org/0000-0003-3089-4773")))
+Description: The silicoChIP package aims to infer transcription factor (TF) binding using multiomic scRNA+scATAC data.
+Depends:
+    R (>= 3.2.2)
+Imports: 
+        BiocParallel,
+        chromVAR, 
+        data.table, 
+        dplyr, 
+        GenomicRanges,
+        ggpubr, 
+        magrittr,
+        Matrix, 
+        motifmatchr, 
+        parallel, 
+        purrr, 
+        psych, 
+        scater, 
+        SingleCellExperiment, 
+        stringr, 
+        SummarizedExperiment,
+        tibble
+Depends:
+Suggests: 
+        ArchR
+License: What license is it under?
+LazyData: true
+RoxygenNote: 7.2.3
