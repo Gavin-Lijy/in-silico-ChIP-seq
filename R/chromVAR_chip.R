@@ -47,7 +47,7 @@ chromVAR_chip = function(atac.sce = atac.sce,
     }
     
     if(method == 'ArchR'){
-        archr_installed = requireNamespace("ggrastr", quietly = TRUE)
+        archr_installed = requireNamespace("ArchR", quietly = TRUE)
         if(!archr_installed){ 
             cat('ArchR not installed, install ArchR or use method = "ChromVAR"')
             stop()
