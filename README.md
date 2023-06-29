@@ -2,10 +2,6 @@
 In silico ChIP-seq: leveraging multi-modal information to perform accurate prediction of transcription factor binding
 sites.
 
-## Reference
-
-Argelaguet, R. et al. Decoding gene regulation in the mouse embryo using single-cell multi-omics. Preprint at bioRxiv https://doi.org/10.1101/2022.06.15.496239 (2022)
-
 ## Introduction
 
 The in silico ChIP-seq library is a computational approach to link TFs to cis-regulatory
@@ -19,6 +15,10 @@ RNA expression of j.
 devtools::install_github("Gavin-Lijy/in-silico-ChIP-seq")
 
 ```
+## Reference
+
+Argelaguet, R. et al. Decoding gene regulation in the mouse embryo using single-cell multi-omics. Preprint at bioRxiv https://doi.org/10.1101/2022.06.15.496239 (2022)
+
 
 ## Example
 
