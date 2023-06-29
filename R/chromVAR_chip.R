@@ -166,4 +166,4 @@ chromVAR_chip = function(atac.sce = atac.sce,
     }
         
     return(chromvar_deviations.se)
-}
+}}
