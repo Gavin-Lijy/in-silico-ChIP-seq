@@ -5,9 +5,13 @@ Maintainer: Ricard Argelaguet <ricard.argelaguet@gmail.com>
 Authors@R: c(person("Ricard", "Argelaguet", role = c("aut", "cre"),
                      email = "ricard.argelaguet@gmail.com",
                      comment = c(ORCID = "http://orcid.org/0000-0003-3199-3722")),
+                person("Gavin", "Li", role = "aut",
+                     email = "jingyu.gavin.li@outlook.com",
+                     comment = c(ORCID = "https://orcid.org/0000-0001-9677-7532")),
               person("Bart", "Theeuwes", role = "aut",
                      email = "barttheeuwes97@gmail.com",
                      comment = c(ORCID = "http://orcid.org/0000-0003-3089-4773")))
+               
 Description: The silicoChIP package aims to infer transcription factor (TF) binding using multiomic scRNA+scATAC data.
 Depends:
     R (>= 3.2.2)
