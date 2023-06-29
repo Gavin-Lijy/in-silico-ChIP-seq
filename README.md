@@ -8,9 +8,9 @@ binding site for TF j if i contains the j motif and its chromatin accessibility 
 RNA expression of j.Formally, we calculate the in silico TF binding score for ATAC peak i and
 TF j with the following equation:
 
-$x_{i j}=\boldsymbol{\sigma}_{i j} \operatorname{minmax}\left(\boldsymbol{\theta}_{i j} \boldsymbol{\pi}_i\right)$
+$x_{i j}={\sigma}_{i j} \operatorname{minmax}\left({\theta}_{i j} {\pi}_i\right)$
 
-where $\boldsymbol{\sigma}_{i j}$ is the correlation between the chromatin accessibility of peak i and the RNA expression of TF j. $\boldsymbol{\theta}_{i j}$ is the motif score for TF i in peak j, and $\boldsymbol{\pi}_i$ is the maximum chromatin accessibility of peak i (across cell types).
+where ${\sigma}_{i j}$ is the correlation between the chromatin accessibility of peak i and the RNA expression of TF j. ${\theta}_{i j}$ is the motif score for TF i in peak j, and ${\pi}_i$ is the maximum chromatin accessibility of peak i (across cell types).
 
 ## Example
 
