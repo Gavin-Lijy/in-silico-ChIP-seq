@@ -1,2 +1,2 @@
-# silicoChIP
+# in silico chip-seq
 
