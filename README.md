@@ -1,16 +1,13 @@
 # in silico ChIP-seq
+In silico ChIP-seq: leveraging multi-modal information to perform accurate prediction of transcription factor binding
+sites.
 
 ## Introduction
 
 The in silico ChIP-seq library is a computational approach to link TFs to cis-regulatory
 elements in the form of ATAC peaks. Intuitively, we consider an ATAC peak i to be a putative
 binding site for TF j if i contains the j motif and its chromatin accessibility correlates with the
-RNA expression of j.Formally, we calculate the in silico TF binding score for ATAC peak i and
-TF j with the following equation:
-
-$x_{i j}={\sigma}_{i j} \operatorname{minmax}\left({\theta}_{i j} {\pi}_i\right)$
-
-where ${\sigma}_{i j}$ is the correlation between the chromatin accessibility of peak i and the RNA expression of TF j. ${\theta}_{i j}$ is the motif score for TF i in peak j, and ${\pi}_i$ is the maximum chromatin accessibility of peak i (across cell types).
+RNA expression of j.
 
 ## Example
 
