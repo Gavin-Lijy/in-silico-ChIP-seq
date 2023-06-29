@@ -1,4 +1,4 @@
-Package: silicoChIP
+Package: in-silico-ChIP-seq
 Title: In silico ChIP-seq of multiomic scRNA+scATAC
 Version: 0.0.0.9000
 Maintainer: Ricard Argelaguet <ricard.argelaguet@gmail.com>

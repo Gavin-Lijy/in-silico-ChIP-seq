@@ -1,11 +1,3 @@
-suppressPackageStartupMessages(library(SingleCellExperiment))
-suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(purrr))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(ggpubr))
-suppressPackageStartupMessages(library(stringr))
-suppressPackageStartupMessages(library(argparse))
-
 #' Drop rows with missing values or zero values
 #'
 #' This function drops rows in a matrix that have missing values, but keeps values equal to zero.
