@@ -1,10 +1,18 @@
 # in silico ChIP-seq
 
+## Introduction
+
 The in silico ChIP-seq library is a computational approach to link TFs to cis-regulatory
 elements in the form of ATAC peaks. Intuitively, we consider an ATAC peak i to be a putative
 binding site for TF j if i contains the j motif and its chromatin accessibility correlates with the
-495 RNA expression of j.
+RNA expression of j.Formally, we calculate the in silico TF binding score for ATAC peak i and
+TF j with the following equation:
 
+$x_{i j}=\boldsymbol{\sigma}_{i j} \operatorname{minmax}\left(\boldsymbol{\theta}_{i j} \boldsymbol{\pi}_i\right)$
+
+where $\boldsymbol{\sigma}_{i j}$ is the correlation between the chromatin accessibility of peak i and the RNA expression of TF j. $\boldsymbol{\theta}_{i j}$ is the motif score for TF i in peak j, and $\boldsymbol{\pi}_i$ is the maximum chromatin accessibility of peak i (across cell types).
+
+## Example
 
 ```R
 # Input:
@@ -32,26 +40,12 @@ suppressPackageStartupMessages({
 ## I/O
 ###################
 io = list()
-io$basedir = '/bi/home/lij/data/gastrulation_multiome_10x'
-
-## NMP trajectory
-#io$RNA_sce = file.path(io$basedir, '/results/rna/metacells/trajectories/nmp/SingleCellExperiment_metacells.rds')
-#io$ATAC_sce = file.path(io$basedir, '/results/atac/archR/metacells/trajectories/nmp/PeakMatrix/PeakMatrix_summarized_experiment_metacells.rds')
-
-## blood trajectory
-# io$outdir <- file.path(io$basedir,"results/rna_atac/gene_regulatory_networks/metacells/trajectories/blood")
-# io$ATAC_sce = file.path(io$outdir,sprintf("PeakMatrix_summarized_experiment_metacells.rds"))
-# io$RNA_sce = file.path(io$outdir,"SingleCellExperiment_metacells.rds")
-
-## All celltypes
-#io$RNA_sce = file.path(io$basedir, '/results/rna/metacells/all_cells/SingleCellExperiment_metacells.rds')
-#io$ATAC_sce = file.path(io$basedir, '/results/atac/archR/metacells/all_cells/PeakMatrix/PeakMatrix_summarized_experiment_metacells.rds')
+io$basedir = 'dir_of_yours'
 
 ## All celltype pseudobulk
 io$RNA_sce = file.path(io$basedir, 'results/rna/pseudobulk/celltype/SingleCellExperiment_pseudobulk.rds')
 io$ATAC_sce = file.path(io$basedir, 'results/atac/archR/pseudobulk/celltype/PeakMatrix/pseudobulk_PeakMatrix_summarized_experiment.rds')
 
-#
 io$motifmatcher <- file.path(io$basedir, "processed/atac/archR/Annotations/CISBP-Scores.rds")
 io$motif2gene <- file.path(io$basedir, "processed/atac/archR/Annotations/CISBP_motif2gene.txt.gz")
 io$background_peaks = file.path(io$basedir,"processed/atac/archR/Background-Peaks.rds")
