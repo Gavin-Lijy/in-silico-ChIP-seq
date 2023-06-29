@@ -9,6 +9,10 @@ elements in the form of ATAC peaks. Intuitively, we consider an ATAC peak i to b
 binding site for TF j if i contains the j motif and its chromatin accessibility correlates with the
 RNA expression of j.
 
+## Installation
+
+devtools::install_github("Gavin-Lijy/in-silico-ChIP-seq")
+
 ## Example
 
 ```R
