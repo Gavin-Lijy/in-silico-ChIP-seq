@@ -15,7 +15,9 @@ RNA expression of j.
 
 ## Installation
 
+```R
 devtools::install_github("Gavin-Lijy/in-silico-ChIP-seq")
+```
 
 ## Example
 
