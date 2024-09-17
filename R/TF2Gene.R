@@ -52,7 +52,7 @@ TF2Gene = function(rna.sce = rna.sce,
     virtual_chip.mtx = assay(motifmatcher_chip.se, 'VirtualChipScores')
 
     # Sanity checks
-    stopifnot(length(intersect(rownames(virtual_chip.mtx),unique(peak2gene.dt$peak)))>1e5)     
+    stopifnot(length(intersect(rownames(virtual_chip.mtx),unique(peak2gene.dt$peak)))>1e5)
 
     ## Link TFs to target genes using the virtual ChIP-seq 
     tf2gene_chip.dt <- mclapply(colnames(virtual_chip.mtx), function(i){
@@ -67,7 +67,7 @@ TF2Gene = function(rna.sce = rna.sce,
         ) %>% merge(peak2gene.dt[peak %in% target_peaks_i,c("peak","gene","dist")], by="peak")
         return(tmp)
         }
-    }, mc.cores=cores) %>% data.table::rbindlist        
+    }, mc.cores=cores) %>% data.table::rbindlist(.)     
                        
     ## Filter TFs and genes 
 
@@ -82,11 +82,11 @@ TF2Gene = function(rna.sce = rna.sce,
     tf2gene_chip.dt <- tf2gene_chip.dt[tf%in%TFs & gene%in%genes,]
 
     # Fetch RNA expression matrices
-    rna_tf.mtx <- logcounts(rna.sce)[str_to_title(unique(tf2gene_chip.dt$tf)),]; rownames(rna_tf.mtx) <- toupper(rownames(rna_tf.mtx))
-    rna_targets.mtx <- logcounts(rna.sce)[unique(tf2gene_chip.dt$gene),]
+    rna_tf.mtx <- assay(rna.sce,"logcounts")[unique(tf2gene_chip.dt$tf),,drop=F]; rownames(rna_tf.mtx) <- toupper(rownames(rna_tf.mtx))
+    rna_targets.mtx <- assay(rna.sce,"logcounts")[unique(tf2gene_chip.dt$gene),,drop=F]
 
     # Filter out lowly variable genes and TFs
-    rna_tf.mtx <- rna_tf.mtx[apply(rna_tf.mtx,1,var)>=1,]
+    rna_tf.mtx <- rna_tf.mtx[apply(rna_tf.mtx,1,var)>=0.1,,drop=F]
     rna_targets.mtx <- rna_targets.mtx[apply(rna_targets.mtx,1,var)>=0.1,]
 
     TFs <- intersect(unique(tf2gene_chip.dt$tf),rownames(rna_tf.mtx))
@@ -104,8 +104,8 @@ TF2Gene = function(rna.sce = rna.sce,
           y <- rna_targets.mtx[i,]
           lm.fit <- lm(y~x)
           data.frame(tf=j, gene=i, beta=round(coef(lm.fit)[[2]],3), pvalue=format(summary(lm.fit)$coefficients[2,4], digits=3))
-        }) %>% data.table::rbindlist
-      }, mc.cores=cores) %>% data.table::rbindlist
+        }) %>% data.table::rbindlist(.)
+      }, mc.cores=cores) %>% data.table::rbindlist(.)
     
     # Add chip score back in so all info is 
     #chip_GRN = merge(tf2gene_chip.dt, GRN_coef.dt, by=c('tf', 'gene'))

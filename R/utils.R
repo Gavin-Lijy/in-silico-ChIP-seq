@@ -87,8 +87,8 @@ annotate_peaks = function(gene_metadata.dt = gene_metadata.dt,
     gene_metadata.ov <- copy(gene_metadata) %>%
       .[strand=="+",c("gene.start","gene.end"):=list(start,end)] %>%
       .[strand=="-",c("gene.start","gene.end"):=list(end,start)] %>%
-      .[strand=="+",c("start","end"):=list (gene.start-gene_window, gene.end+gene_window)] %>%
-      .[strand=="-",c("end","start"):=list (gene.start+gene_window, gene.end-gene_window)] %>% 
+      .[strand=="+",c("start","end"):=list (gene.start-distance, gene.end+distance)] %>%
+      .[strand=="-",c("end","start"):=list (gene.start+distance, gene.end-distance)] %>% 
       setkey(chr,start,end)
 
     stopifnot((gene_metadata.ov$end-gene_metadata.ov$start)>0)

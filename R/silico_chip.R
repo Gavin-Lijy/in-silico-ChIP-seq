@@ -25,7 +25,7 @@ silico_chip = function(atac.sce = atac.sce,
                        motif2gene.dt = motif2gene.dt, 
                        min_number_peaks = 50,
                        TFs_filt = NULL, 
-                       remove_motifs = c("T_789"),
+                       remove_motifs = NULL,
                        cores = detectCores()){
     
     ## Subset peaks 
@@ -63,7 +63,7 @@ silico_chip = function(atac.sce = atac.sce,
     ## Prepare data 
     tf2peak_cor.mtx <- assay(tf2peak_cor.se,"cor")
     motifmatcher.mtx <- assay(motifmatcher.se,"motifScores")
-    atac.mtx <- assay(atac.sce[peaks,],"logcounts") %>% round(3)    
+    atac.mtx <- assay(atac.sce[peaks,],"logcounts") %>% round(3)
     
     ######################################
     ## Create virtual chip-seq library ##
@@ -74,6 +74,7 @@ silico_chip = function(atac.sce = atac.sce,
     print(sprintf("Number of TFs: %s",length(TFs)))
 
     virtual_chip.dt <- mclapply(TFs, function(i) {
+      print(i)
 
       peaks <- names(which(abs(tf2peak_cor.mtx[,i])>0)) # we only consider chromatin activators # The 'abs' actually makes it so that all non-zero are kept (== all)
 
@@ -102,10 +103,10 @@ silico_chip = function(atac.sce = atac.sce,
         ) %>% sort.abs("score") %>% 
           .[,c("peak","score","correlation_score","max_accessibility_score","motif_score")]
 
-        to_return.dt <- tmp[!is.na(score),c("peak","score")]  %>% .[,tf:=i] # 
+        to_return.dt <- tmp[!is.na(score),c("peak","score")]  %>% .[,tf:=i]
         return(to_return.dt)
       }
-    }, mc.cores=cores) %>% data.table::rbindlist
+    }, mc.cores=cores) %>% data.table::rbindlist(.)
     
     output = list()
     output$virtual_chip.dt = virtual_chip.dt

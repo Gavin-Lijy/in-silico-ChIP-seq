@@ -18,7 +18,6 @@
 #' @import SingleCellExperiment
 #' @importFrom dplyr bind_cols
 #' @importFrom psych corr.test
-#' @importFrom stringr str_to_title
 #' @importFrom tibble column_to_rownames
 #' @importFrom parallel detectCores mclapply
 #'
@@ -39,7 +38,7 @@ cor_TF_acc = function(rna.sce,
     motif2gene.dt <- motif2gene.dt[motif%in%motifs]
 
     genes <- intersect(toupper(rownames(rna.sce)),motif2gene.dt$gene)
-    rna_tf.sce <- rna.sce[str_to_title(genes),]
+    rna_tf.sce <- rna.sce[genes,]
     rownames(rna_tf.sce) <- toupper(rownames(rna_tf.sce))
     motif2gene.dt <- motif2gene.dt[gene%in%genes]
 
